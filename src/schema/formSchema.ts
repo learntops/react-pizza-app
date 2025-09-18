@@ -18,6 +18,16 @@ export const formSchema = z
       .string()
       .min(10, { message: "Contact number must be at least 10 digits." })
       .regex(/^\+?\d+$/, { message: "Invalid contact number format." }),
+    pizzas: z
+      .array(
+        z.object({
+          name: z.string().optional(),
+          size: z.string().optional(),
+          toppings: z.array(z.string()).default([]),
+        })
+      )
+      .optional()
+      .default([]),
   })
   .refine((data) => data.email === data.confirmEmail, {
     message: "Emails do not match.",

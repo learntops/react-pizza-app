@@ -9,7 +9,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 type FieldConfig = {
   name: keyof FormSchema;
@@ -51,40 +50,31 @@ const CustomerInfo = () => {
   const { control } = useFormContext<FormSchema>();
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg font-semibold">
-          Enter your details
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {customerInfoFields.map(({ name, label, placeholder, type }) => (
-            <FormField
-              key={name}
-              control={control}
-              name={name}
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel className="text-sm font-medium">{label}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type={type}
-                      placeholder={placeholder}
-                      {...field}
-                      value={field.value ?? ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      className="w-full"
-                    />
-                  </FormControl>
-                  <FormMessage className="text-xs text-red-500 mt-1" />
-                </FormItem>
-              )}
-            />
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {customerInfoFields.map(({ name, label, placeholder, type }) => (
+        <FormField
+          key={name}
+          control={control}
+          name={name}
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel className="text-sm font-medium">{label}</FormLabel>
+              <FormControl>
+                <Input
+                  type={type}
+                  placeholder={placeholder}
+                  {...field}
+                  value={field.value ?? ""}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  className="w-full"
+                />
+              </FormControl>
+              <FormMessage className="text-xs text-red-500 mt-1" />
+            </FormItem>
+          )}
+        />
+      ))}
+    </div>
   );
 };
 
