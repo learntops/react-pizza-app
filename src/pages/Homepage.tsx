@@ -1,5 +1,7 @@
+import PizzaBuilder from "../main/PizzaBuilder";
+
 const Homepage = () => {
-  return <div className="bg-red-500">Homepage</div>;
+  return <PizzaBuilder />;
 };
 
 export default Homepage;
