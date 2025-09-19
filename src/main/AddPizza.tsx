@@ -7,8 +7,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SelectSize from "./SelectSize";
+import { useState } from "react";
 const AddPizza = () => {
   const { control } = useFormContext<FormSchema>();
+  const [openPizza, setOpenPizza] = useState<string | undefined>(undefined);
 
   const {
     fields: pizzaFields,
@@ -20,11 +22,14 @@ const AddPizza = () => {
   });
 
   const onAddPizza = () => {
+    const newIndex = pizzaFields.length;
     appendPizza({
       name: "",
       size: "",
       toppings: [],
     });
+
+    setOpenPizza(`pizza-${newIndex}`);
   };
   return (
     <div className="mt-5">
@@ -37,10 +42,15 @@ const AddPizza = () => {
           <span className="font-extrabold text-lg">+</span> Add pizza
         </p>
       </div>
-      {pizzaFields.map((pizza, pizzaIndex) => (
-        <div key={pizzaIndex}>
-          <Accordion type="single" collapsible>
-            <AccordionItem value="item-1">
+      <Accordion
+        type="single"
+        collapsible
+        value={openPizza}
+        onValueChange={setOpenPizza}
+      >
+        {pizzaFields.map((pizza, pizzaIndex) => (
+          <div key={pizzaIndex}>
+            <AccordionItem key={pizza.id} value={`pizza-${pizzaIndex}`}>
               <AccordionTrigger className="flex items-center justify-center">
                 <div className="flex flex-row-reverse gap-2">
                   <span className="text-green-400 font-semibold">&#10003;</span>
@@ -58,9 +68,9 @@ const AddPizza = () => {
                 </button>
               </AccordionContent>
             </AccordionItem>
-          </Accordion>
-        </div>
-      ))}
+          </div>
+        ))}
+      </Accordion>
     </div>
   );
 };

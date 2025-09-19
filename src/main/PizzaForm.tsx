@@ -19,7 +19,8 @@ const PizzaForm = () => {
       pizzas: [],
     },
   });
-  const { handleSubmit } = form;
+  const { handleSubmit, formState } = form;
+  const { errors } = formState;
   const onSubmit: SubmitHandler<FormSchema> = (values) => {
     console.log(values);
   };
@@ -35,6 +36,12 @@ const PizzaForm = () => {
           <CardContent>
             <CustomerInfo />
             <AddPizza />
+
+            {errors.pizzas && (
+              <p className="text-red-500 text-sm mt-2 mb-2">
+                {errors.pizzas.message as string}
+              </p>
+            )}
             <Button type="submit">Order now</Button>
           </CardContent>
         </Card>

@@ -26,7 +26,7 @@ export const formSchema = z
           toppings: z.array(z.string()).default([]),
         })
       )
-      .optional()
+      .min(1, { message: "You must add at least one pizza." })
       .default([]),
   })
   .refine((data) => data.email === data.confirmEmail, {
