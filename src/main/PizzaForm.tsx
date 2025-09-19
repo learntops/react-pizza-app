@@ -28,14 +28,14 @@ const PizzaForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="flex-1">
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">
+            <CardTitle className="text-lg font-semibold text-gray-700">
               Enter your details
             </CardTitle>
           </CardHeader>
           <CardContent>
             <CustomerInfo />
             <AddPizza />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Order now</Button>
           </CardContent>
         </Card>
       </form>

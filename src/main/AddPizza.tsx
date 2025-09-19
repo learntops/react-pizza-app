@@ -1,7 +1,5 @@
 import type { FormSchema } from "@/schema/formSchema";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { Input } from "@/components/ui/input";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
@@ -10,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import SelectSize from "./SelectSize";
 const AddPizza = () => {
-  const { control, register } = useFormContext<FormSchema>();
+  const { control } = useFormContext<FormSchema>();
 
   const {
     fields: pizzaFields,
@@ -34,27 +32,27 @@ const AddPizza = () => {
         className="flex justify-between cursor-pointer "
         onClick={onAddPizza}
       >
-        <h3>Choose your pizzas</h3>
-        <p className="text-green-400">+ Add pizza</p>
+        <h3 className="text-gray-700">Choose your pizzas</h3>
+        <p className="text-green-400">
+          <span className="font-extrabold text-lg">+</span> Add pizza
+        </p>
       </div>
       {pizzaFields.map((pizza, pizzaIndex) => (
         <div key={pizzaIndex}>
-          {/* <h2>Add pizza{pizzaIndex + 1}</h2>
-          <Input
-            {...register(`pizzas.${pizzaIndex}.name` as const)}
-            placeholder="Step title"
-            defaultValue={pizza.name ?? ""}
-            className="mb-2"
-          /> */}
-
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger className="flex items-center justify-center">
-                <span className="text-green-400 font-medium">&#10003;</span>
-                Pizza {pizzaIndex + 1}
+                <div className="flex flex-row-reverse gap-2">
+                  <span className="text-green-400 font-semibold">&#10003;</span>
+
+                  <h2 className="text-gray-600">
+                    Pizza
+                    <span className="ml-0.5">{pizzaIndex + 1}</span>
+                  </h2>
+                </div>
               </AccordionTrigger>
               <AccordionContent>
-                <SelectSize />
+                <SelectSize pizzaIndex={pizzaIndex} />
                 <button type="button" onClick={() => removePizza(pizzaIndex)}>
                   Remove
                 </button>

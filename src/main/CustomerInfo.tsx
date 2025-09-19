@@ -58,7 +58,9 @@ const CustomerInfo = () => {
           name={name}
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel className="text-sm font-medium">{label}</FormLabel>
+              <FormLabel className="text-sm font-medium text-gray-700">
+                {label}
+              </FormLabel>
               <FormControl>
                 <Input
                   type={type}
